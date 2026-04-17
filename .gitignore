@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/venv/
+backend/__pycache__/
+backend/.venv/
+
+# Build outputs
+frontend/dist/
+frontend/.vite/
+
+# ALL data and outputs - don't upload to railway
+backend/outputs/
+backend/data/
+outputs/
+*.pkl
+*.parquet
+
+# Logs
+*.log
+fyersApi.log
+fyersRequests.log
+backend.log
+
+# Environment
+.env
+.env.local
+*token.txt
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.tmp
+*.bak
+
+# Railway
+.railway/
+
+# Local Netlify folder
+.netlify

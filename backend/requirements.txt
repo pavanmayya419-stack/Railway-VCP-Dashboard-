@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+pandas
+yfinance
+scipy
+streamlit
+plotly
+xgboost
+scikit-learn
+shap
+numpy
+fyers-apiv3
+python-dotenv
+requests
+pyarrow
+PyGithub

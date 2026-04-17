@@ -1,0 +1,27 @@
+{
+  "backend": {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "debug": false
+  },
+  "frontend": {
+    "port": 5173,
+    "proxy": {
+      "/api": {
+        "target": "http://localhost:8000",
+        "changeOrigin": true,
+        "secure": false
+      }
+    }
+  },
+  "database": {
+    "type": "sqlite",
+    "path": "backend/data/vcp.db"
+  },
+  "features": {
+    "ml_enabled": true,
+    "cache_enabled": true,
+    "auto_refresh": false,
+    "refresh_interval": 300
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "timestamp": "2026-04-15T20:42:05.406696",
+  "total_issues": 50,
+  "high_severity": 50,
+  "medium_severity": 0,
+  "issues": [
+    {
+      "ticker": "RSG",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "COR",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "MPWR",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "IFF",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ODFL",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "SWK",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "AGNC",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "MO",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "CAT",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "EBAY",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "BIDU",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "LLY",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ALL",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "CMS",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "SO",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "DFIN",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ILMN",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "APOG",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "HSIC",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "CNA",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "CBOE",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "DD",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ZION",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ECL",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "SWKS",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "LVS",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "CM",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ADI",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "APD",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "RUN",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "QCOM",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "MVIS",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "TFC",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "PVH",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ICE",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "PNW",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "T",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "WEN",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ADM",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "INVH",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "MAS",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "INFO",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "ZM",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "GS",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "IDXX",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "UAL",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "NA",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "IVZ",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "CDW",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    },
+    {
+      "ticker": "PWR",
+      "issue": "Error loading: 'Index' object has no attribute 'tz'",
+      "severity": "HIGH"
+    }
+  ]
+}
