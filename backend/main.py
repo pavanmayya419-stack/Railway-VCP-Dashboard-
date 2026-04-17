@@ -315,6 +315,7 @@ def simulate(market: str = "US", min_score: float = 60.0):
 @app.get("/api/scan/live")
 async def get_live_scan(market: str = "IN"):
     tickers = _load_tickers(market)
+    results = []
     
     # Use yfinance for live data
     from yfinance_live import get_live_ohlcv
