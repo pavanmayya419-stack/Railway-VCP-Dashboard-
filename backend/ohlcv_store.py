@@ -11,6 +11,13 @@ Strategy:
 - bulk_download(market, tickers, workers=6, force=False) → (done, skipped, failed)
 """
 
+import os
+import time
+import logging
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timedelta
+
+import pandas as pd
 import yfinance as yf
 import requests
 
