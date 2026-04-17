@@ -356,12 +356,19 @@ async def get_live_scan(market: str = "IN"):
     }
 
 # Serve frontend static files
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+static_dir = os.path.join(BASE_DIR, "..", "frontend", "dist")
+
 @app.get("/")
 def serve_root():
-    return FileResponse("../frontend/dist/index.html")
+    index_path = os.path.join(static_dir, "index.html")
+    if os.path.exists(index_path):
+        return FileResponse(index_path)
+    return {"error": "Frontend not built. Please run npm run build in frontend directory."}
 
 # Serve static assets
-app.mount("/", StaticFiles(directory="../frontend/dist", html=True), name="static")
+if os.path.exists(static_dir):
+    app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn
