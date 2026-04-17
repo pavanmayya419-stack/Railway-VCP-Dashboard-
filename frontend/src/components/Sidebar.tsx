@@ -208,7 +208,7 @@ export default function Sidebar({
                             className={`sidebar-toggle ${isLiveScan ? 'sidebar-toggle-on' : ''}`}
                         >
                             {isLiveScan
-                                ? <><ToggleRight className="w-5 h-5 text-emerald-400" /><span className="text-emerald-400">FYERS LIVE</span></>
+                                ? <><ToggleRight className="w-5 h-5 text-emerald-400" /><span className="text-emerald-400">YFINANCE LIVE</span></>
                                 : <><ToggleLeft className="w-5 h-5 text-slate-500" /><span className="text-slate-500">OFF (EOD)</span></>
                             }
                         </button>

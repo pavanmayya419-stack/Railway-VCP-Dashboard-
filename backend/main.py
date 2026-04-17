@@ -19,7 +19,7 @@ from ml_api import router as ml_router
 from refresh_data import generate_cache_for_market, _load_tickers
 from ticker_metadata import get_metadata
 from ohlcv_store import bulk_download, _store_status, fetch_local
-from yfinance_live import get_live_quotes, get_live_ohlcv, get_live_quote
+from yfinance_live import get_live_ohlcv
 
 class RefreshRequest(BaseModel):
     market: str | None = None
@@ -250,68 +250,18 @@ async def ohlcv_download(req: OHLCVDownloadRequest):
 
 @app.get("/api/broker/status")
 def broker_status():
-    token_file = os.getenv("FYERS_TOKEN_FILE", "fyers_token.txt")
-    status = {"fyers": {"linked": False, "updated_at": None}}
-    if os.path.exists(token_file):
-        status["fyers"]["linked"] = True
-        status["fyers"]["updated_at"] = time.ctime(os.path.getmtime(token_file))
-    return status
+    return {"fyers": {"linked": False, "updated_at": None}}
 
 @app.get("/api/broker/fyers/auth_url")
 def fyers_auth_url():
-    client_id = os.getenv("FYERS_APP_ID")
-    redirect_uri = "https://www.google.com"  # Using user's current working redirect
-    url = f"https://api-t1.fyers.in/api/v3/generate-authcode?client_id={client_id}&redirect_uri={redirect_uri}&response_type=code&state=None"
-    return {"url": url}
+    return {"url": "#"}
 
 class FyersLoginRequest(BaseModel):
     url: str
 
 @app.post("/api/broker/fyers/login")
 async def fyers_login(req: FyersLoginRequest):
-    try:
-        from fyers_apiv3 import fyersModel
-        import urllib.parse as urlparse
-        
-        # Check if it's a URL or just a raw code
-        if "auth_code=" in req.url:
-            parsed = urlparse.urlparse(req.url)
-            params = urlparse.parse_qs(parsed.query)
-            auth_code = params.get("auth_code")
-            if not auth_code:
-                raise HTTPException(status_code=400, detail="Invalid URL: auth_code not found")
-            auth_code = auth_code[0]
-        else:
-            # Assume it's the raw code
-            auth_code = req.url.strip()
-            
-        if not auth_code:
-            raise HTTPException(status_code=400, detail="Empty auth code provided")
-        
-        client_id = os.getenv("FYERS_APP_ID")
-        secret_key = os.getenv("SECRET_KEY")
-        
-        session = fyersModel.SessionModel(
-            client_id=client_id,
-            secret_key=secret_key,
-            redirect_uri="https://www.google.com",
-            response_type="code",
-            grant_type="authorization_code"
-        )
-        session.set_token(auth_code)
-        response = session.generate_token()
-        
-        if response.get("s") == "ok":
-            token = response.get("access_token")
-            token_file = os.getenv("FYERS_TOKEN_FILE", "fyers_token.txt")
-            with open(token_file, "w") as f:
-                f.write(token)
-            return {"message": "Success", "token": token[:10] + "..."}
-        else:
-            raise HTTPException(status_code=400, detail=f"Fyers error: {response.get('message')}")
-            
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    return {"message": "Fyers integration is disabled."}
 
 class HoldingScanRequest(BaseModel):
     ticker: str

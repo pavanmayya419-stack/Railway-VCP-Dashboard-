@@ -33,7 +33,7 @@ def get_existing_us_stocks():
         symbol = filename.replace('.csv', '')
         
         # Filter for US stocks (no .NS suffix and not special files)
-        if not symbol.endswith('_NS') and not symbol in ['sp500_constituents', 'fyers_tickers', 'nifty500']:
+        if not symbol.endswith('_NS') and not symbol in ['sp500_constituents', 'nifty500']:
             # Check if file has data
             try:
                 df = pd.read_csv(file, parse_dates=['Date'], index_col='Date')

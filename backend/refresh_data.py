@@ -22,14 +22,6 @@ def _load_tickers(market_key: str) -> list:
     """Load full ticker list for the given market from CSV, with fallback."""
     base = os.path.dirname(__file__)
     if market_key == "IN":
-        # Check fyers_tickers.csv first
-        fyers_csv = os.path.join(base, "fyers_tickers.csv")
-        if os.path.exists(fyers_csv):
-            df = pd.read_csv(fyers_csv)
-            if "Symbol" in df.columns:
-                symbols = df["Symbol"].dropna().astype(str).str.strip().str.upper().unique()
-                return [f"{s}.NS" if not s.endswith(".NS") else s for s in symbols]
-        
         csv_path = os.path.join(base, "nifty500.csv")
         if os.path.exists(csv_path):
             df = pd.read_csv(csv_path)
