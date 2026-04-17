@@ -22,7 +22,7 @@ import IntradayTab from './components/IntradayTab';
 import ErrorBoundary from './components/ErrorBoundary';
 
 import {
-  Search, BarChart3, Flame, Zap, BookOpen, TrendingUp, Briefcase, Brain, Crown, Shield, Copy, Send
+  Menu, X, Search, BarChart3, Flame, Zap, BookOpen, TrendingUp, Briefcase, Brain, Crown, Shield, Copy, Send
 } from 'lucide-react';
 
 // ─── Tab definitions ─────────────────────────────────────────────────────────
@@ -67,6 +67,7 @@ function App() {
   const [portfolioResult, setPortfolioResult] = useState<any>(null);
   const [refreshSummary, setRefreshSummary] = useState<{ market: string; date: string; count: number }[] | null>(null);
   const [isLiveScan, setIsLiveScan] = useState(false);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   const queryClient = useQueryClient();
 
   // ── Data queries ─────────────────────────────────────────────────────────
@@ -281,7 +282,20 @@ function App() {
   // ── Render ───────────────────────────────────────────────────────────────
   return (
     <ErrorBoundary>
-      <div className="app-shell">
+      <div className={`app-shell ${mobileSidebarOpen ? 'mobile-sidebar-open' : ''}`}>
+
+        {/* Mobile Header (Floating) */}
+        <button
+          className="mobile-header-toggle"
+          onClick={() => setMobileSidebarOpen(!mobileSidebarOpen)}
+        >
+          {mobileSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
+
+        {/* Backdrop for mobile */}
+        {mobileSidebarOpen && (
+          <div className="mobile-sidebar-backdrop" onClick={() => setMobileSidebarOpen(false)} />
+        )}
 
         {/* ── Sidebar ─────────────────────────────────────────────────── */}
         <Sidebar

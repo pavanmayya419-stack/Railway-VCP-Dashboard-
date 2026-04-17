@@ -374,12 +374,15 @@
   background: linear-gradient(180deg, rgba(14, 14, 24, 0.5) 0%, transparent 100%);
   flex-shrink: 0;
   overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE/Edge */
 }
 
 .tab-bar::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 
 .tab-item {
@@ -484,6 +487,7 @@
     opacity: 0;
     transform: translateY(-8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -495,8 +499,15 @@
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 4px rgba(79, 70, 229, 0.2); }
-  50% { box-shadow: 0 0 12px rgba(79, 70, 229, 0.4); }
+
+  0%,
+  100% {
+    box-shadow: 0 0 4px rgba(79, 70, 229, 0.2);
+  }
+
+  50% {
+    box-shadow: 0 0 12px rgba(79, 70, 229, 0.4);
+  }
 }
 
 /* ─── Utility overrides for tables (scanner, etc.) ──────────────────────── */
@@ -512,9 +523,78 @@
 }
 
 /* ─── Responsive ────────────────────────────────────────────────────────── */
+.mobile-header-toggle {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+  z-index: 1000;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-sidebar-backdrop {
+  display: none;
+}
+
 @media (max-width: 1024px) {
   .sidebar-root {
-    width: 240px;
-    min-width: 240px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 500;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 20px 0 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .mobile-sidebar-open .sidebar-root {
+    transform: translateX(0);
+  }
+
+  .mobile-header-toggle {
+    display: flex;
+  }
+
+  .mobile-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(2px);
+    z-index: 450;
+  }
+
+  .tab-bar {
+    padding-right: 80px;
+    /* Space for the toggle button if it was on top, but it's on bottom now */
+  }
+}
+
+@media (max-width: 640px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .tab-bar {
+    padding: 8px 10px 0;
+    gap: 0;
+  }
+
+  .tab-item {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+
+  .tab-content {
+    padding: 10px;
   }
 }
