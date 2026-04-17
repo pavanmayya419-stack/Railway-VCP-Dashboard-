@@ -4,7 +4,15 @@ import numpy as np
 import yfinance as yf
 from scipy.signal import argrelextrema
 
+import requests
+
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+
+# Setup sesssion for yfinance to avoid "Invalid Crumb" errors in cloud environments
+session = requests.Session()
+session.headers.update({
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+})
 
 def get_local_path(ticker: str) -> str:
     return os.path.join(DATA_DIR, f"{ticker.replace('.','_')}.csv")
@@ -75,7 +83,7 @@ def fetch_data(ticker: str, period: str = "1y", min_date=None, market: str = Non
 
     # 3. Live yfinance fetch (no local data yet)
     try:
-        raw = yf.download(ticker, period=period, progress=False, auto_adjust=True)
+        raw = yf.download(ticker, period=period, progress=False, auto_adjust=True, session=session)
         if raw is not None and not raw.empty:
             if isinstance(raw.columns, pd.MultiIndex):
                 raw.columns = raw.columns.get_level_values(0)

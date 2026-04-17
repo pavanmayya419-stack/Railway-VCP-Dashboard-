@@ -11,14 +11,13 @@ Strategy:
 - bulk_download(market, tickers, workers=6, force=False) → (done, skipped, failed)
 """
 
-import os
-import time
-import logging
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timedelta
-
-import pandas as pd
 import yfinance as yf
+import requests
+
+session = requests.Session()
+session.headers.update({
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+})
 
 log = logging.getLogger(__name__)
 
@@ -64,7 +63,7 @@ def fetch_local(ticker: str, market: str) -> pd.DataFrame | None:
 def _download_from_yf(ticker: str, period: str = FULL_PERIOD) -> pd.DataFrame | None:
     """Download OHLCV from yfinance. Returns cleaned DataFrame or None."""
     try:
-        raw = yf.download(ticker, period=period, progress=False, auto_adjust=True)
+        raw = yf.download(ticker, period=period, progress=False, auto_adjust=True, session=session)
         if raw is None or raw.empty:
             return None
         # Flatten MultiIndex columns (yfinance >=0.2 returns these for single tickers too)
@@ -203,10 +202,12 @@ def update_ticker(ticker: str, market: str) -> bool:
     try:
         new_raw = yf.download(
             ticker,
+            period=None,
             start=start_str,
             end=end_str,
             progress=False,
             auto_adjust=True,
+            session=session,
         )
         if new_raw is None or new_raw.empty:
             return True  # no new data (weekend/holiday) — not a failure

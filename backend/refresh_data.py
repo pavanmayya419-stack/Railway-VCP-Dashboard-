@@ -93,11 +93,14 @@ def generate_cache_for_market(market_key="IN", force=False):
                 end_date = pd.Timestamp.now()
                 start_date = end_date - timedelta(days=5)
                 
-                # Convert ticker format for yfinance
-                yf_ticker = f"{ticker}.NS" if market_key == "IN" and not ticker.endswith(".NS") else ticker
+                import requests
+                session = requests.Session()
+                session.headers.update({
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+                })
                 
                 new_data = yf.download(yf_ticker, start=start_date.strftime("%Y-%m-%d"), 
-                                      end=end_date.strftime("%Y-%m-%d"), progress=False, auto_adjust=True)
+                                      end=end_date.strftime("%Y-%m-%d"), progress=False, auto_adjust=True, session=session)
                 
                 if new_data is not None and not new_data.empty:
                     if isinstance(new_data.columns, pd.MultiIndex):

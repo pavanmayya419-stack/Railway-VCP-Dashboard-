@@ -2,7 +2,13 @@ import os
 import logging
 import pandas as pd
 import yfinance as yf
+import requests
 from datetime import datetime, timedelta
+
+session = requests.Session()
+session.headers.update({
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36'
+})
 
 log = logging.getLogger(__name__)
 
@@ -19,7 +25,7 @@ def get_live_ohlcv(ticker: str, market: str = "US") -> pd.DataFrame | None:
         else:
             yf_ticker = ticker
             
-        df = yf.download(yf_ticker, period="2y", progress=False, auto_adjust=True)
+        df = yf.download(yf_ticker, period="2y", progress=False, auto_adjust=True, session=session)
         
         if df is None or df.empty or len(df) < 60:
             log.warning(f"Insufficient data for {ticker}")
