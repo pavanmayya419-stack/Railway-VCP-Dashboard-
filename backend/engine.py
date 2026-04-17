@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import numpy as np
 import yfinance as yf
+from yahooquery import Ticker
 from scipy.signal import argrelextrema
 
 import requests
@@ -81,7 +82,21 @@ def fetch_data(ticker: str, period: str = "1y", min_date=None, market: str = Non
         except Exception:
             pass
 
-    # 3. Live yfinance fetch (no local data yet)
+    # 3. Live yahooquery fetch (much more robust on cloud IPs)
+    try:
+        t = Ticker(ticker)
+        raw = t.history(period=period)
+        if raw is not None and not raw.empty:
+            if isinstance(raw.index, pd.MultiIndex):
+                raw = raw.reset_index(level=0, drop=True)
+            raw.columns = [str(c).title() for c in raw.columns]
+            if all(c in raw.columns for c in required) and len(raw) >= 60:
+                raw.index = pd.to_datetime(raw.index)
+                return raw[required]
+    except Exception:
+        pass
+
+    # 4. Fallback yfinance fetch (with session)
     try:
         raw = yf.download(ticker, period=period, progress=False, auto_adjust=True, session=session)
         if raw is not None and not raw.empty:

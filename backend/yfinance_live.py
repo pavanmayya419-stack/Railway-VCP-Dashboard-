@@ -2,6 +2,7 @@ import os
 import logging
 import pandas as pd
 import yfinance as yf
+from yahooquery import Ticker
 import requests
 from datetime import datetime, timedelta
 
@@ -20,6 +21,26 @@ def get_live_ohlcv(ticker: str, market: str = "US") -> pd.DataFrame | None:
     """
     try:
         # Convert ticker format based on market
+        if market == "IN" and not ticker.endswith(".NS"):
+            yf_ticker = f"{ticker}.NS"
+        else:
+            yf_ticker = ticker
+            
+        t = Ticker(yf_ticker)
+        df = t.history(period="2y")
+        
+        if df is not None and not df.empty:
+            if isinstance(df.index, pd.MultiIndex):
+                df = df.reset_index(level=0, drop=True)
+            df.columns = [str(c).title() for c in df.columns]
+            if all(c in df.columns for c in ["Open", "High", "Low", "Close", "Volume"]) and len(df) >= 60:
+                df.index = pd.to_datetime(df.index)
+                return df[["Open", "High", "Low", "Close", "Volume"]]
+    except Exception:
+        pass
+
+    try:
+        # Fallback to yfinance
         if market == "IN" and not ticker.endswith(".NS"):
             yf_ticker = f"{ticker}.NS"
         else:

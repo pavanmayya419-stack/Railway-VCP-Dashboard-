@@ -373,6 +373,13 @@
   border-bottom: 1px solid rgba(30, 30, 50, 0.4);
   background: linear-gradient(180deg, rgba(14, 14, 24, 0.5) 0%, transparent 100%);
   flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.tab-bar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .tab-item {

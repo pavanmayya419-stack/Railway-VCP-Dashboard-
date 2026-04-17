@@ -13,3 +13,4 @@ python-dotenv
 requests
 pyarrow
 PyGithub
+yahooquery
