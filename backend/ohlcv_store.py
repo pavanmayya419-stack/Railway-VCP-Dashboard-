@@ -202,29 +202,53 @@ def update_ticker(ticker: str, market: str) -> bool:
             combined.to_parquet(path)
             return True
 
-    # Fallback to yfinance delta
+    # Time window for incremental update
     start_str = (last_date + timedelta(days=1)).strftime("%Y-%m-%d")
     end_str = today.strftime("%Y-%m-%d")
 
+    # Fallback to yahooquery delta
     try:
-        new_raw = yf.download(
-            ticker,
-            period=None,
-            start=start_str,
-            end=end_str,
-            progress=False,
-            auto_adjust=True,
-            session=session,
-        )
-        if new_raw is None or new_raw.empty:
-            return True  # no new data (weekend/holiday) — not a failure
-        if isinstance(new_raw.columns, pd.MultiIndex):
-            new_raw.columns = new_raw.columns.get_level_values(0)
-        new_raw.columns = [str(c).strip().title() for c in new_raw.columns]
+        t = Ticker(ticker)
+        new_raw = t.history(start=start_str, end=end_str)
+        if new_raw is not None and not new_raw.empty:
+            if isinstance(new_raw.index, pd.MultiIndex):
+                new_raw = new_raw.reset_index(level=0, drop=True)
+            new_raw.columns = [str(c).title() for c in new_raw.columns]
+            if all(c in new_raw.columns for c in REQUIRED_COLS):
+                new_raw.index = pd.to_datetime(new_raw.index)
+                new_raw = new_raw[REQUIRED_COLS]
+    except Exception:
+        new_raw = None
+
+    if new_raw is None or new_raw.empty:
+        # Final fallback to yfinance
+        try:
+            new_raw = yf.download(
+                ticker,
+                period=None,
+                start=start_str,
+                end=end_str,
+                progress=False,
+                auto_adjust=True,
+                session=session,
+            )
+            if new_raw is not None and not new_raw.empty:
+                if isinstance(new_raw.columns, pd.MultiIndex):
+                    new_raw.columns = new_raw.columns.get_level_values(0)
+                new_raw.columns = [str(c).strip().title() for c in new_raw.columns]
+                new_raw.index = pd.to_datetime(new_raw.index)
+        except Exception:
+            new_raw = None
+
+    if new_raw is None or new_raw.empty:
+        return True  # no new data (weekend/holiday) — not a failure
+
+    try:
         new_raw = new_raw.loc[:, ~new_raw.columns.duplicated(keep="first")]
         available = [c for c in REQUIRED_COLS if c in new_raw.columns]
         if len(available) < 5:
             return True
+            
         new_raw = new_raw[REQUIRED_COLS].copy()
         new_raw.index = pd.to_datetime(new_raw.index)
 
