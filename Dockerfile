@@ -26,4 +26,5 @@ ENV PORT=8001
 EXPOSE 8001
 
 # Command to run the backend (which serves the built frontend)
+ENV PYTHONPATH=/app/backend
 CMD ["sh", "-c", "python -m uvicorn backend.main:app --host 0.0.0.0 --port ${PORT}"]
