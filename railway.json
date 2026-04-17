@@ -1,7 +1,6 @@
 {
-  "$schema": "https://railway.app/railway.json",
   "build": {
-    "builder": "NIXPACKS_PYTHON"
+    "builder": "NIXPACKS"
   },
   "deploy": {
     "numReplicas": 1,
