@@ -13,13 +13,13 @@ from fastapi.responses import FileResponse
 from typing import List
 from pydantic import BaseModel
 
-from data_manager import list_cached_dates, load_scan_cache
-from engine import fetch_data, compute_indicators, DETECTOR, run_alpha_vcp_simulator
-from ml_api import router as ml_router
-from refresh_data import generate_cache_for_market, _load_tickers
-from ticker_metadata import get_metadata
-from ohlcv_store import bulk_download, _store_status, fetch_local
-from yfinance_live import get_live_ohlcv
+from .data_manager import list_cached_dates, load_scan_cache
+from .engine import fetch_data, compute_indicators, DETECTOR, run_alpha_vcp_simulator
+from .ml_api import router as ml_router
+from .refresh_data import generate_cache_for_market, _load_tickers
+from .ticker_metadata import get_metadata
+from .ohlcv_store import bulk_download, _store_status, fetch_local
+from .yfinance_live import get_live_ohlcv
 
 class RefreshRequest(BaseModel):
     market: str | None = None
@@ -168,7 +168,7 @@ def get_chart_data(ticker: str):
     
     # Use yfinance for live data
     try:
-        from yfinance_live import get_live_ohlcv
+        from .yfinance_live import get_live_ohlcv
         live_df = get_live_ohlcv(ticker, market)
         if live_df is not None and not live_df.empty:
             df = live_df
@@ -318,7 +318,7 @@ async def get_live_scan(market: str = "IN"):
     results = []
     
     # Use yfinance for live data
-    from yfinance_live import get_live_ohlcv
+    from .yfinance_live import get_live_ohlcv
     
     def process_live(ticker):
         try:

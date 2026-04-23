@@ -13,7 +13,7 @@ import pickle
 import time
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from engine import fetch_data, DETECTOR
+from .engine import fetch_data, DETECTOR
 
 CACHE_DIR = os.path.join(os.path.dirname(__file__), "outputs", "scan_cache")
 
@@ -70,18 +70,18 @@ def generate_cache_for_market(market_key="IN", force=False):
 
     # Always do an incremental OHLCV refresh before generating the scanner cache
     # Fetch last 5 days of data to ensure we have latest data
-    from ohlcv_store import bulk_download
+    from .ohlcv_store import bulk_download
     tickers = _load_tickers(market_key)
     print(f"[PRE-REFRESH] Updating OHLCV data for {len(tickers)} tickers in {market_key} (last 5 days)...")
     
     # Force update last 5 days for all tickers
-    from ohlcv_store import download_ticker
+    from .ohlcv_store import download_ticker
     from datetime import timedelta
     from concurrent.futures import ThreadPoolExecutor, as_completed
     
     def force_update_5days(ticker):
         try:
-            from ohlcv_store import _parquet_path, fetch_local
+            from .ohlcv_store import _parquet_path, fetch_local
             import yfinance as yf
             import pandas as pd
             

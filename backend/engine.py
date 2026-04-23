@@ -55,7 +55,7 @@ def fetch_data(ticker: str, period: str = "1y", min_date=None, market: str = Non
     # 1. Parquet OHLCV store (preferred — local, fast, 2y history)
     if market:
         try:
-            from ohlcv_store import fetch_local
+            from .ohlcv_store import fetch_local
             df = fetch_local(ticker, market)
             if df is not None and len(df) >= 60:
                 return df
@@ -64,7 +64,7 @@ def fetch_data(ticker: str, period: str = "1y", min_date=None, market: str = Non
     else:
         # Try both markets if market not specified
         try:
-            from ohlcv_store import fetch_local
+            from .ohlcv_store import fetch_local
             for m in ["US", "IN"]:
                 df = fetch_local(ticker, m)
                 if df is not None and len(df) >= 60:
@@ -408,7 +408,7 @@ class VCPDetector:
 
         # Enrich with metadata
         try:
-            from ticker_metadata import get_metadata
+            from .ticker_metadata import get_metadata
             m = "IN" if ".NS" in ticker else "US"
             meta = get_metadata(ticker, m)
             if meta:

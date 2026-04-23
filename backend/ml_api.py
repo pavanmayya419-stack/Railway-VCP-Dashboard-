@@ -37,8 +37,8 @@ from sklearn.neighbors import NearestNeighbors
 from sklearn.metrics import confusion_matrix, roc_auc_score
 
 # Import existing infrastructure
-from data_manager import list_cached_dates, load_scan_cache
-from engine import fetch_data
+from .data_manager import list_cached_dates, load_scan_cache
+from .engine import fetch_data
 
 router = APIRouter(prefix="/api/ml", tags=["ml"])
 
